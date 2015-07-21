@@ -13,6 +13,9 @@ sudo yum install -y \
   git \
   vim \
   git-review
+  
+sudo pip install \
+  git-review
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 echo '. ~/.git-completion.bash' >> ~/.bashrc
