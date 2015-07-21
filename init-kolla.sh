@@ -9,14 +9,24 @@ sudo service docker restart
 sudo yum install -y https://rdoproject.org/repos/rdo-release.rpm
 
 sudo yum install -y \
-  python-pip \
+  gcc \
   git \
-  vim \
-  git-review
-  
+  git-review \
+  libffi-devel \
+  libxml2-devel \
+  libxslt-devel \
+  MySQL-python \
+  openssl \
+  openssl-devel \
+  python-devel \
+  python-pip \
+  vim
+
 sudo pip install \
   ansible \
-  git-review
+  docker-py \
+  git-review \
+  shade
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 echo '. ~/.git-completion.bash' >> ~/.bashrc
