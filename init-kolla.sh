@@ -43,6 +43,11 @@ if [[ ! -d "kolla" ]]; then
   git clone https://github.com/stackforge/kolla.git
 fi
 
-sudo chown -R vagrant:vagrant /home/vagrant
+cp -r ~vagrant/kolla/etc/kolla/ /etc
+mkdir /opt/kolla
+chown -R vagrant: /etc/kolla/ /opt/kolla/
+
+sudo chown -R vagrant: /home/vagrant
+sudo chown -R vagrant: /home/vagrant/.ssh
 
 sudo setenforce permissive

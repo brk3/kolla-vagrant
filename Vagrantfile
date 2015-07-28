@@ -20,6 +20,22 @@ Vagrant.configure(2) do |config|
     vb.memory = "8192"
   end
 
+  keyname = 'ansible-key'
+  publickey = File.read("#{keyname}.pub")
+  if not File.exist?(keyname)
+    `ssh-keygen -f #{keyname} -P ''`
+  end
+  privatekey = File.read(keyname)
+  publickey = File.read("#{keyname}.pub")
+  config.vm.provision "shell", inline: <<-SHELL
+    echo '#{privatekey}' > ~vagrant/.ssh/#{keyname}
+    echo '#{publickey}' > ~vagrant/.ssh/#{keyname}.pub
+    echo '#{publickey}' >> ~vagrant/.ssh/authorized_keys
+    chmod 0600 ~vagrant/.ssh/*
+    echo 'Host *' > ~vagrant/.ssh/config
+    echo 'StrictHostKeyChecking no' >> ~vagrant/.ssh/config
+  SHELL
+
   (0..2).each do |i|
     config.vm.define "kolla#{i}" do |kolla|
       kolla.vm.hostname = "kolla#{i}"
